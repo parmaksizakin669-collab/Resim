@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akın ∞ Deniz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 350px;
+            margin: 0 auto;
+            background: #fffbf0;
+            border-radius: 25px;
+            border: 6px solid #ff8fab;
+            padding: 20px;
+            box-shadow: 0 15px 30px rgba(255, 143, 171, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            height: 30px;
+            background: repeating-linear-gradient(
+                45deg,
+                #ff8fab,
+                #ff8fab 8px,
+                #ffc1cc 8px,
+                #ffc1cc 16px
+            );
+            border-radius: 20px 20px 0 0;
+        }
+
+        .header {
+            text-align: center;
+            margin: 15px 0 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rainbow {
+            position: absolute;
+            left: 15px;
+            top: 5px;
+            font-size: 18px;
+        }
+
+        .star {
+            position: absolute;
+            right: 15px;
+            top: 5px;
+            font-size: 18px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff6b9d;
+            margin: 12px 0;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #ff8fab;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .counter-section {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .counter-box {
+            background: #ffa726;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 8px 0;
+            box-shadow: 0 4px 12px rgba(255, 167, 38, 0.3);
+            min-width: 80px;
+        }
+
+        .counter-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .gallery-section {
+            margin: 20px 0;
+        }
+
+        .gallery-title {
+            font-size: 20px;
+            color: #4ecdc4;
+            text-align: center;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .gallery-item {
+        width: 100%;
+        height: 200px;   /* 📌 Daha uzun yaptım, dikey resimler için */
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #a8e6cf, #88d8c0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .music-section {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .music-player {
+            background: rgba(255, 143, 171, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .decorative-icons {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            font-size: 20px;
+        }
+
+        .note-section {
+            background: rgba(255, 143, 171, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .note-title {
+            color: #ff8fab;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .note-text {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .bottom-decoration {
+            text-align: center;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        audio {
+            width: 100%;
+            height: 35px;
+            border-radius: 8px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .music-info {
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Mobil optimizasyonları */
+        @media (max-width: 400px) {
+            .container {
+                max-width: 95%;
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 22px;
+            }
+            
+            .subtitle {
+                font-size: 11px;
+            }
+            
+            .gallery-item {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .container {
+                padding: 12px;
+                border-width: 4px;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
+            
+            .counter-box {
+                font-size: 18px;
+                padding: 10px 14px;
+            }
+            
+            .gallery-item {
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="rainbow">🌈</div>
+            <div class="star">⭐</div>
+            <div class="title">Akın ∞ Deniz</div>
+            <div class="subtitle">
+                Seninle tanıştığımız gün bu kadar şanslı olduğumu bilmiyordum bu sayfa ikimizin aşkının yansıması...
+            </div>
+        </div>
+
+        <div class="counter-section">
+            <div class="counter-box" id="dayCount">0</div>
+            <div class="counter-label">gün geçti</div>
+        </div>
+
+        <div class="gallery-section">
+            <div class="gallery-title">Galeri</div>
+            <div class="gallery" id="gallery">
+                <!-- Resimler buraya koddan eklenecek -->
+            </div>
+        </div>
+
+        <div class="decorative-icons">
+            <div>🌸</div>
+            <div>🌈</div>
+        </div>
+
+        <div class="music-section">
+            <div class="music-player">
+                <div id="audioControls" class="hidden">
+                    <audio controls id="audioPlayer">
+                        Tarayıcınız ses öğesini desteklemiyor.
+                    </audio>
+                    <div class="music-info" id="musicInfo"></div>
+                </div>
+                <div id="noMusic" style="color: #999; font-size: 12px;">
+                    🎵 Müzik yüklenmedi
+                </div>
+            </div>
+        </div>
+
+        <div class="note-section">
+            <div class="note-title">Not:</div>
+            <div class="note-text">
+                Seninle olduğum her an daha güzel, her şey daha anlamlı geliyor. İyi ki varsın, iyi ki benimlesin.
+            </div>
+        </div>
+
+        <div class="bottom-decoration">
+            <div>💕</div>
+            <div>🎂</div>
+        </div>
+    </div>
+
+    <script>
+        // Global değişkenler
+        let counterInterval;
+        let startDate = null;
+        let galleryImages = [];
+        let currentMusic = null;
+
+        // Otomatik sayaç başlatma
+        function setCounterDate(date) {
+            startDate = new Date(date);
+            
+            if (counterInterval) {
+                clearInterval(counterInterval);
+            }
+            
+            updateCounter();
+            counterInterval = setInterval(updateCounter, 1000);
+        }
+
+        function updateCounter() {
+            if (!startDate) {
+                document.getElementById('dayCount').textContent = '0';
+                return;
+            }
+            
+            const now = new Date();
+            const timeDiff = now.getTime() - startDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+            
+            document.getElementById('dayCount').textContent = daysDiff;
+        }
+
+        // Müzik fonksiyonları
+        function setMusic(musicUrl, musicTitle = 'Müzik') {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioControls = document.getElementById('audioControls');
+            const noMusic = document.getElementById('noMusic');
+            const musicInfo = document.getElementById('musicInfo');
+            
+            audioPlayer.src = musicUrl;
+            audioControls.classList.remove('hidden');
+            noMusic.classList.add('hidden');
+            musicInfo.textContent = musicTitle;
+            currentMusic = musicUrl;
+        }
+
+        function removeMusic() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioControls = document.getElementById('audioControls');
+            const noMusic = document.getElementById('noMusic');
+            
+            audioPlayer.src = '';
+            audioControls.classList.add('hidden');
+            noMusic.classList.remove('hidden');
+            currentMusic = null;
+        }
+
+        // Galeri yönetimi
+        function addImageToGallery(imageUrl, index = null) {
+            if (index !== null && index >= 0 && index < 6) {
+                galleryImages[index] = imageUrl;
+            } else {
+                galleryImages.push(imageUrl);
+            }
+            renderGallery();
+        }
+
+        function removeImageFromGallery(index) {
+            if (index >= 0 && index < galleryImages.length) {
+                galleryImages.splice(index, 1);
+                renderGallery();
+            }
+        }
+
+        function clearGallery() {
+            galleryImages = [];
+            renderGallery();
+        }
+
+        function setGalleryImages(images) {
+            galleryImages = images.slice(0, 6); // Maksimum 6 resim
+            renderGallery();
+        }
+
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            
+            // Mevcut resimleri göster
+            galleryImages.forEach((imageUrl, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = `Galeri resmi ${index + 1}`;
+                img.onerror = function() {
+                    // Resim yüklenmezse placeholder göster
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'gallery-placeholder';
+                    placeholder.innerHTML = '❌';
+                    item.innerHTML = '';
+                    item.appendChild(placeholder);
+                };
+                
+                item.appendChild(img);
+                gallery.appendChild(item);
+            });
+            
+            // Eğer resim yoksa boş mesajı göster
+            if (galleryImages.length === 0) {
+                const emptyMsg = document.createElement('div');
+                emptyMsg.style.textAlign = 'center';
+                emptyMsg.style.color = '#999';
+                emptyMsg.style.fontSize = '12px';
+                emptyMsg.style.padding = '20px';
+                emptyMsg.textContent = '📷 Henüz resim eklenmedi';
+                gallery.appendChild(emptyMsg);
+            }
+        }
+
+        // Örnek veriler yükleme
+        function loadExampleData() {
+            // Örnek tarih (30 gün önce)
+            const exampleDate = new Date();
+            exampleDate.setDate(exampleDate.getDate() - 30);
+            setCounterDate(exampleDate.toISOString().split('T')[0]);
+            
+            // Örnek resimler
+            const exampleImages = [
+                'https://via.placeholder.com/300x120/ffb3d9/ffffff?text=💕+Anı+1',
+                'https://via.placeholder.com/300x120/b3d9ff/ffffff?text=🌟+Anı+2',
+                'https://via.placeholder.com/300x120/d9ffb3/ffffff?text=🌸+Anı+3',
+                'https://via.placeholder.com/300x120/fffab3/ffffff?text=💖+Anı+4'
+            ];
+            setGalleryImages(exampleImages);
+        }
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            renderGallery();
+            updateCounter();
+            
+             siteAPI.setDate("2025-8-13");
+
+            
+            
+             siteAPI.setImages([
+        "https://i.ibb.co/YB7T4LBj/akin.png",
+        "https://i.ibb.co/DD2gqhZq/akin2.jpg",
+        "https://i.ibb.co/v47G0hws/akin3.jpg",
+        "https://i.ibb.co/HJ83Hs6/akin5.jpg"
+    ]);
+
+    // Müzik ekle
+siteAPI.setMusic(
+    "https://raw.githubusercontent.com/parmaksizakin669-collab/Resim/c0679b41cd003780b7a2ce3fd8a3bb5ce76f177e/Tugkan.mp3",
+    "Bizim Şarkımız 🎶"
+);
+
+
+    
+        });
+
+        // Global API - Konsol üzerinden kullanım
+        window.siteAPI = {
+            // Sayaç
+            setDate: setCounterDate,
+            
+            // Müzik
+            setMusic: setMusic,
+            removeMusic: removeMusic,
+            
+            // Galeri
+            addImage: addImageToGallery,
+            removeImage: removeImageFromGallery,
+            clearGallery: clearGallery,
+            setImages: setGalleryImages,
+            
+            // Örnek veriler
+            loadExamples: loadExampleData,
+            
+            // Durum kontrolü
+            getStatus: function() {
+                return {
+                    counterDate: startDate,
+                    musicLoaded: currentMusic !== null,
+                    imageCount: galleryImages.length,
+                    images: galleryImages
+                };
+            }
+        };
+    </script>
+</body>
+</html>
